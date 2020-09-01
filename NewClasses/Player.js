@@ -21,10 +21,18 @@ class Player extends Pawn {
         this.knockbackIgnore = 0;
         this.knockback = 15;
 
+        //ignores damaage for a while
+        this.invincibility = false;
+        
         //dash input ignore time + dash velocity X constant no decrease;
         this.dashIgnoreTime = 10;
         this.dashIgnore = 0;
         this.dashSpeed = 30;
+
+        //play death animation;
+        this.death = false;
+        this.deathFrame = 0;
+        this.lifeEnd = 10;
     }
 }
 
@@ -63,11 +71,6 @@ Player.prototype.input = function () {
         this.killZone = new KillZone(this.x + 50*   (Math.abs(this.swordDirect) < 2)*this.swordDirect,  
                                        this.y + 50* (Math.abs(this.swordDirect) > 1)*this.swordDirect * 0.5, 
                                        50, 50, 1, 5, this); 
-
-        console.log(this.x);
-        console.log(this.y);
-        console.log(this.killZone.x);
-        console.log(this.killZone.y);
         
     }
     //shift
@@ -75,7 +78,6 @@ Player.prototype.input = function () {
         this.dashIgnore = 1;
     }
 }
-
 
 Player.prototype.draw = function () {
     const x = 11*50;
@@ -93,7 +95,6 @@ Player.prototype.draw = function () {
 
     if (this.slashFrame != -1) this.slashDraw();
 }
-
 
 Player.prototype.slashDraw = function () {
     ctx.fillStyle = '#992b3f';
@@ -133,22 +134,65 @@ Player.prototype.slashDraw = function () {
     ctx.restore();
 }
 
+Player.prototype.contact = function (entity) {
+    switch (entity.type) {
+        case 'killZone':
+
+            //stagger time invincibility 
+            if (this.knockbackIgnore) return;
+            
+            let direct; 
+
+            if (entity.x == this.x) direct = this.direct;
+            else direct = (entity.x > this.x)*2 -1; 
+
+            this.velox = direct * this.knockback;
+            this.veloy = -this.knockback;
+
+            this.knockbackDelay = 1;
+
+            this.HP-=1; 
+            //temporary invincibility 
+            this.invincibility = true;
+
+            break;  
+    }
+
+    PositionUpdate(this);
+}
+
+Player.prototype.deathDraw = function () {
+
+    ctx.drawImage(Image_death, 500, 300, 100,100);
+    
+}
 
 Player.prototype.tick =  function () 
 {
-    console.log(this.swordDirect);
     // hitbox update =================================================
     this.hitbox.update();
 
     //input  & physics aplliacnce ====================================
     //knockback input block aplliance 
-    if (!this.knockbackIgnore && !this.dashIgnore)  
+    if (!this.knockbackIgnore && !this.dashIgnore && !this.death) {  
         this.input();
+        //if this if case is true, it means that it shouldn't have invicibility from recent hit.
+        this.invincibility = false;
 
-    else { 
+    }else if (this.death) {
+        //simply draw the animation and reset when ready
+        GlobalStasis = true;
+        GlobalDeath = true;
+
+        this.deathDraw();
+        this.deathFrame++;
+        if (this.deathFrame == this.lifeEnd) //ToDo
+        //skip
+        return; 
+    } else { 
+        //can handle both knockback ignore and dash regardless of if activated.
         this.knockbackIgnore += this.knockbackIgnore > 0; 
         this.dashIgnore += this.dashIgnore > 0;
-        
 
         //dash veloX constant, no falling when dash = true;
         if (this.dashIgnore > 0) {

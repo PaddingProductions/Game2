@@ -2,6 +2,8 @@ let moveKey = {};
 let commandKey = {};
 let mouse = {};
 let GlobalPause = false;
+let GlobalTitle = true;
+let GlobalStasis = true;
 
 const map = [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -23,7 +25,9 @@ const backGround = [
     [1],
 ];
 
+const TitleScreen = new TitleMenu();
 const PauseScreen = new PausePopup(0,0,69);
+
 
 let enemy = [
     new Enemy(20,12,1, 0),

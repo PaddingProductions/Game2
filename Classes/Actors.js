@@ -16,26 +16,7 @@ class Pawn {
 
 
 
-    contact = function (entity) {
-        switch (entity.type) {
-            case 'killZone':
-                let direct; 
 
-                if (entity.x == this.x) direct = this.direct;
-                else direct = (entity.x > this.x)*2 -1; 
-
-                this.velox = direct * this.knockback;
-                this.veloy = -this.knockback;
-
-                this.knockbackDelay = 1;
-
-                this.HP-1; 
-
-                break;  
-        }
-
-        PositionUpdate(this);
-    }
 }
 
 class EnemyTemplate {
@@ -57,7 +38,7 @@ class EnemyTemplate {
         this.death = false;
         this.deathTime = 0;
         this.deathEnd = 5;
-        this.killZone = new KillZone(x,y,1,1,1,-1,this);
+        this.killZone = new KillZone(this.x,this.y,1,1,1,-1,this);
     }
 
     tick = function () {

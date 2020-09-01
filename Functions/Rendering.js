@@ -94,8 +94,13 @@ let backGroundPrint = function(x,y) {
     ctx.restore();
 }
 
-text = function(x,y, text, size) {
-	for (let i=0; i<text.length;i++) ctx.drawImage(letterList[text.charAt(i)],x + i*8*size,y, 8*size, 8*size);
+text = function(x,y, text, size) { 
+	for (let i=0; i<text.length;i++) {
+
+		if (text.charAt(i) == ' ') continue;
+
+		ctx.drawImage(letterList[text.charAt(i)],x + i*8*size,y, 8*size, 8*size);
+	}
 }
 
 

@@ -20,8 +20,11 @@ const StaticObjectCollision = (Initx,Inity,w,h) => {
     return false;
 }
 
-const PositionUpdate = function(O) { 
-    // slow down
+const PositionUpdate = function(O, ignore) { 
+
+    if (ignore === undefined) ignore = [];
+
+    //     ----------slow down---------
     let accept = !StaticObjectCollision(O.x + O.velox - (O.velox > 0) - (O.velox < 0), O.y,
                                          O.hitbox.w,  O.hitbox.h);
 
@@ -39,20 +42,27 @@ const PositionUpdate = function(O) {
     }
 
 
-    //fall
+    //      ------------ fall ------------
+    let isIgnored = false;
+    for (let i=0; i<ignore.length;i++) 
+        if (ignore[i] == "fall") 
+            isIgnored = true;
+
     accept = !StaticObjectCollision(O.x, O.y + O.veloy+1, O.hitbox.w, O.hitbox.h);
 
-    if (accept) {
-        O.veloy ++;
-        O.y += O.veloy;
-    }
-    else {
-        const negative = (O.veloy > 0) - (O.veloy< 0);
+    if (!isIgnored) {
+        if (accept) {
+            O.veloy ++;
+            O.y += O.veloy;
+        }
+        else {
+            const negative = (O.veloy > 0) - (O.veloy< 0);
 
-        if (negative == 1)       O.y = Math.floor((O.y + O.veloy) / 50) *50;
-        else if (negative == -1) O.y = Math.ceil ((O.y + O.veloy) / 50) *50;
+            if (negative == 1)       O.y = Math.floor((O.y + O.veloy) / 50) *50;
+            else if (negative == -1) O.y = Math.ceil ((O.y + O.veloy) / 50) *50;
 
-        O.veloy = 0;
+            O.veloy = 0;
+        }
     }
 }
 

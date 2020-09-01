@@ -3,7 +3,9 @@ const ctx = canvas.getContext("2d");
 
 const MainLoop = () => {
     
-    if (!GlobalPause) {
+    GlobalStasis = GlobalTitle || GlobalPause;
+
+    if (!GlobalStasis) {
         //the many, many objects:
         player.tick();
         for (let i=0; i<enemy.length; i++) enemy[i].tick();
@@ -15,13 +17,18 @@ const MainLoop = () => {
             for (let i=0; i<enemy.length; i++) 
                 if (TemporaryEntityCollision(enemy[i].hitbox, player.killZone)) 
                     enemy[i].hitbox.handleContact(player.killZone);
-    }
-    //enemy -> player
-    for (let i=0; i<enemy.length; i++) 
-        if (TemporaryEntityCollision(enemy[i].killZone, player.hitbox))
-            player.hitbox.handleContact(enemy[i].killZone);
+
+        //enemy -> player
+        for (let i=0; i<enemy.length; i++) {
+            if (player.invincibility == false) {
+                if (TemporaryEntityCollision(enemy[i].killZone, player.hitbox))
+                    player.hitbox.handleContact(enemy[i].killZone);
+            }
+        }
 
 
+    } 
+    
 
     //recover
     ctx.fillStyle = '#eee';
@@ -39,7 +46,8 @@ const MainLoop = () => {
     healthDisplay.draw();
 
     PauseScreen.tick();
-    
+    TitleScreen.tick();
+
     commandKey = {};
     mouse = {};
 }
@@ -48,4 +56,4 @@ setInterval(MainLoop, 33);
 
 document.addEventListener("keydown", keyDown);
 document.addEventListener("keyup", keyUp);
-document.addEventListener("mouseup", mouseUp);
+document.addEventListener("mouseup", onMouseClick);

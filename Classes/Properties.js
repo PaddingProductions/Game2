@@ -34,16 +34,12 @@ class KillZone {
 }
 
 class ClickBox {
-    constructor (x,y,w,h, master) {
+    constructor (x,y,w,h, name) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
 
-        this.type = 'clickBox';
-    }
-
-    handleContact = function (entity) {
-        this.trigger();
+        this.type = name;
     }
 }
