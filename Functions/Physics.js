@@ -77,3 +77,10 @@ const TemporaryEntityCollision = function (entity1, entity2) {
     
 }
 
+const TrigCalculation = function (angle) {
+
+    let changeX = - Math.sin(angle) * 50;
+    let changeY = Math.cos(angle) * 50;
+
+    return [changeX, changeY];
+}

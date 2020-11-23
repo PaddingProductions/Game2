@@ -35,5 +35,19 @@ HealthDisplay.prototype.draw = function() {
         ctx.translate(-25,-25);
     }
     ctx.restore();
+}
 
+class WeaponDisplay extends VarStaticDisplay {
+    constructor(x,y,master) {
+        super(x,y,master)
+    }
+}
+
+WeaponDisplay.prototype.draw = function() {
+    ctx.save();
+
+    ctx.translate(this.x,this.y);
+
+    text(0,0, player.weapon.name, 1.5);
+    ctx.restore();
 }

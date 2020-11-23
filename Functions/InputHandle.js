@@ -8,6 +8,8 @@ const keyUp = (e) => {
 }
 
 const onMouseClick = function (e) {
+    // for the actual game not button clicks
+    mouse.button = e.button;
     
     // if (entity.exist()) if (mouseClick(e, entity)) entity.trigger();  
     //copy and paste the code above to add new button listener, fill in the entity with the name of button.

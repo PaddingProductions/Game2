@@ -5,8 +5,14 @@ const MainLoop = () => {
     
     GlobalStasis = GlobalTitle || GlobalPause;
 
+    if (GlobalDevMode) {
+        // add anything that'll help u on debuggin'
+        
+
+
+    }
     if (!GlobalStasis) {
-        //the many, many objects:
+        //====Tick all objects=====
         player.tick();
         for (let i=0; i<enemy.length; i++) enemy[i].tick();
 
@@ -38,18 +44,19 @@ const MainLoop = () => {
     backGroundPrint(player.x,player.y);
     MapPrint(player.x,player.y);
 
-
-
     for (let i=0; i<enemy.length; i++) enemy[i].draw();
     player.draw();
 
+    if (player.killZone != undefined) player.killZone.draw();
+    
     healthDisplay.draw();
+    //weaponDisplay.draw();
 
     PauseScreen.tick();
     TitleScreen.tick();
 
     commandKey = {};
-    mouse = {};
+    mouse.button = -1;
 }
 
 setInterval(MainLoop, 33);
@@ -57,3 +64,4 @@ setInterval(MainLoop, 33);
 document.addEventListener("keydown", keyDown);
 document.addEventListener("keyup", keyUp);
 document.addEventListener("mouseup", onMouseClick);
+document.addEventListener("mousemove", mouse.tick);

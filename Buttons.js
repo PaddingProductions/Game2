@@ -48,3 +48,4 @@ class RestartButton extends ClickBox {
 }
 
 const restartButton = new RestartButton(40,320,150,40, "RestartButton");
+

@@ -19,17 +19,26 @@ class Hitbox {
 }
 
 class KillZone {
-    constructor (x,y,w,h,damage, life, master) {
+    constructor (x,y,w,h, angle, damage, life, master) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
+        this.angle = angle;
         this.damage = damage;
         this.master = master;
 
         this.life = 0;
         this.lifeTime = life;
         this.type = 'killZone';
+    }
+
+    // for debugging
+    draw = () => {
+        ctx.fillStyle = "#f00";
+
+        ctx.fillRect(11*50 + this.master.x-this.x, 7*50 + this.master.y-this.y, this.w, this.h);
+
     }
 }
 

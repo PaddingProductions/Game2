@@ -31,10 +31,10 @@ class TitleMenu {
         text(250, 300,"hello there", 5);
         text(400, 350,"click start", 2);
 
-        text(500, 400     ,"m:     attack", 1.5);
-        text(500, 400 +20 ,"awsd:  movement", 1.5);
-        text(500, 400 +40 ,"space: jump", 1.5);
-        text(500, 400 +60 ,"shift: dash", 1.5);
+        text(500, 400     ,"left click: attack", 1.5);
+        text(500, 400 +20 ,"awsd:       movement", 1.5);
+        text(500, 400 +40 ,"space:      jump", 1.5);
+        text(500, 400 +60 ,"shift:      dash", 1.5);
         
     }
 }
