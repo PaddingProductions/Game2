@@ -30,7 +30,6 @@ Player.prototype.draw = function () {
 
     ctx.restore();
 
-    if (this.slashFrame != -1) this.slashDraw();
 }
 
 
@@ -41,20 +40,8 @@ Player.prototype.slashDraw = function () {
     ctx.translate(this.killZone.x +25, this.killZone.y +25);
     ctx.rotate(this.killZone.angle);    
     
-    // this is the code that draws a slash animation to the right at 0,0 as upperleft corner.
-    // -25 on all X axis to center it for easier and better rotation and translations. 
-    // pretty confidant on this, if u think it's wrong, don't.
-
-    switch(this.slashFrame) {
-        case 1:
-            drawTri(30 -25,  10, 20 -25, 0, 10 -25,  5); break;
-        case 2:
-            drawTri(25 -25,  10, 35 -25, 20, 30 -25, 40); break;
-        case 3: 
-            drawTri(50 -25, 35, 45 -25, 25, 42 -25, 38);
-            drawTri(30 -25, 50, 40 -25, 35, 32 -25, 20); break;
-        case 4:
-            drawTri(25 -25, 35, 15 -25, 50,  5 -25, 48); break;
-    }
+    ctx.fillStyle = "#f00";
+    ctx.fillRect(-25,-25,50,50);
+    
     ctx.restore();
 }

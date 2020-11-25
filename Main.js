@@ -19,18 +19,16 @@ const MainLoop = () => {
 
         // check entity collison
         // player sword -> enemy
-        if (player.killZone != 0 && player.killZone != undefined) 
+        if (player.killZone != undefined) 
             for (let i=0; i<enemy.length; i++) 
                 if (TemporaryEntityCollision(enemy[i].hitbox, player.killZone)) 
                     enemy[i].hitbox.handleContact(player.killZone);
 
         //enemy -> player
-        for (let i=0; i<enemy.length; i++) {
-            if (player.invincibility == false) {
+        for (let i=0; i<enemy.length; i++) 
+            if (player.invincibility == false) 
                 if (TemporaryEntityCollision(enemy[i].killZone, player.hitbox))
                     player.hitbox.handleContact(enemy[i].killZone);
-            }
-        }
 
 
     } 
@@ -46,8 +44,6 @@ const MainLoop = () => {
 
     for (let i=0; i<enemy.length; i++) enemy[i].draw();
     player.draw();
-
-    if (player.killZone != undefined) player.killZone.draw();
     
     healthDisplay.draw();
     //weaponDisplay.draw();

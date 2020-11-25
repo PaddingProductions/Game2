@@ -25,18 +25,18 @@ Player.prototype.input = function () {
     //left click
     if (mouse.button == 0) {
 
-        let changeX = TrigCalculation(mouse.angle)[0];
-        let changeY = TrigCalculation(mouse.angle)[1];
+        let changeX = TrigCalculation(mouse.angle, 50)[0];
+        let changeY = TrigCalculation(mouse.angle, 50)[1];
                 
-        this.killZone = new KillZone(this.x + changeX -25,
-                                     this.y + changeY -25,
+        this.killZone = new KillZone(this.x + changeX ,
+                                     this.y + changeY ,
                                      50, 50, mouse.angle, 1, 5, this); 
-
-
         
     }
     //shift
     if (commandKey[16]) {
-        this.dashIgnore = 1;
+        this.velox = 30*this.direct;
+        this.ignoreTime = 5;
+        this.ignoreCounter = 0;
     }
 }

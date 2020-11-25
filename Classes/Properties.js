@@ -37,7 +37,7 @@ class KillZone {
     draw = () => {
         ctx.fillStyle = "#f00";
 
-        ctx.fillRect(11*50 + this.master.x-this.x, 7*50 + this.master.y-this.y, this.w, this.h);
+        ctx.fillRect(11*50 + this.x - this.master.x, 7*50 + this.master.y - this.y, this.w, this.h);
 
     }
 }

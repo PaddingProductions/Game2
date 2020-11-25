@@ -8,20 +8,16 @@ class Player extends Pawn {
 
         this.MaxHP = 5;
         this.HP = 5;
-        
-        this.slashFrame = -1;
-        
+                
         //ignores inputs when hit momentarily 
-        this.knockbackIgnoreTime = 20;
-        this.knockbackIgnore = 0;
-        this.knockback = 15;
+        this.ignoreTime = 0;
+        this.ignoreCounter = -1;
+        this.ignore = false;
 
         //ignores damaage for a while
         this.invincibility = false;
         
-        //dash input ignore time + dash velocity X constant no decrease;
-        this.dashIgnoreTime = 10;
-        this.dashIgnore = 0;
+        //dash velocity X constant no decrease;
         this.dashSpeed = 30;
 
         //play death animation;

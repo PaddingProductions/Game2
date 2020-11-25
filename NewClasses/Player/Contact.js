@@ -3,7 +3,7 @@ Player.prototype.contact = function (entity) {
         case 'killZone':
 
             //stagger time invincibility 
-            if (this.knockbackIgnore) return;
+            if (this.invincible) return;
             
             let direct; 
 
