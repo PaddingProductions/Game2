@@ -5,12 +5,7 @@ const MainLoop = () => {
     
     GlobalStasis = GlobalTitle || GlobalPause;
 
-    if (GlobalDevMode) {
-        // add anything that'll help u on debuggin'
-        
-
-
-    }
+    
     if (!GlobalStasis) {
         //====Tick all objects=====
         player.tick();

@@ -30,18 +30,22 @@ Player.prototype.draw = function () {
 
     ctx.restore();
 
+
+    //========Effects=====
+    if (this.killZone != undefined) this.slashDraw();
+
 }
 
 
 Player.prototype.slashDraw = function () {
-    ctx.fillStyle = '#992b3f';
+
     ctx.save();
     
-    ctx.translate(this.killZone.x +25, this.killZone.y +25);
+    ctx.fillRect(11*50 + this.killZone.x - this.x, 7*50 + this.killZone.y - this.y, this.killZone.w, this.killZone.h);
     ctx.rotate(this.killZone.angle);    
     
-    ctx.fillStyle = "#f00";
-    ctx.fillRect(-25,-25,50,50);
+    ctx.fillStyle = "#80060c";
+    ctx.fillRect(-25,-25,this.killZone.w,this.killZone.h);
     
     ctx.restore();
 }
